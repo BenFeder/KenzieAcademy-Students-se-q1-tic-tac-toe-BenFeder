@@ -26,14 +26,15 @@ const handleClick = function (event) {
   }
 
   playerSelections.push(Number(cell.id));
-  if (checkWinner(playerSelections) == true) {
+  if (checkWinner(playerSelections)) {
     alert(`Player ` + currentPlayer + ` wins!`);
     resetGame();
   } else if (checkDraw()) {
     alert("Draw!");
     resetGame();
+  } else {
+    currentPlayer = nextPlayer; // swap players
   }
-  currentPlayer = nextPlayer; // swap players
 };
 
 const cells = document.querySelectorAll("td");
@@ -45,21 +46,23 @@ function checkDraw() {
   return playerOSelections.length + playerXSelections.length >= cells.length;
 }
 
-function checkWinner() {
+function checkWinner(playerSelections) {
   // Check if player has all values of each combination
   for (
-    winningCombo = 0;
-    winningCombo < winningCombinations.length;
-    winningCombo++
+    let winningComboIndex = 0;
+    winningComboIndex < winningCombinations.length;
+    winningComboIndex++
   ) {
     let matches = 0;
     for (
       let chosenCell = 0;
-      chosenCell < winningCombinations[winningCombo].length;
+      chosenCell < winningCombinations[winningComboIndex].length;
       chosenCell++
     ) {
       if (
-        playerSelections.includes(winningCombinations[winningCombo][chosenCell])
+        playerSelections.includes(
+          winningCombinations[winningComboIndex][chosenCell]
+        )
       ) {
         matches++;
       } else {
