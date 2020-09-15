@@ -1,2 +1,13 @@
-
 /*  Put your CSS Here */
+
+td {
+  width: 75px;
+  height: 75px;
+  border: 1px solid blue;
+}
+td:hover {
+  background: orange;
+}
+table {
+  border: 1px solid green;
+}
