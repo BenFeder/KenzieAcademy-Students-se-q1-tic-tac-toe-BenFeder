@@ -1,8 +1,12 @@
 /*  Put your CSS Here */
 
+* {
+  font-size: 75px;
+}
+
 td {
-  width: 75px;
-  height: 75px;
+  width: 100px;
+  height: 100px;
   border: 1px solid blue;
 }
 td:hover {
