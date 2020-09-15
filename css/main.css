@@ -4,6 +4,10 @@
   font-size: 75px;
 }
 
+h1 {
+  font-size: 30px;
+}
+
 td {
   width: 100px;
   height: 100px;
@@ -11,7 +15,9 @@ td {
 }
 td:hover {
   background: orange;
+  cursor: pointer;
 }
+
 table {
   border: 1px solid green;
 }
