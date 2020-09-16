@@ -29,20 +29,20 @@ const handleClick = function (event) {
   }
 
   playerSelections.push(Number(cell.id));
+  console.log(playerSelections);
   if (checkWinner(playerSelections)) {
     alert(`Player ` + currentPlayer + ` wins!`);
-
     resetGame();
   } else if (checkDraw()) {
     alert("Draw!");
 
     numDraws++;
 
-    let displayDraws = document.createElement("h1");
-    displayDraws.innerText = `Draws: ${numDraws}`;
-    document.body.appendChild(displayDraws);
-
     resetGame();
+
+    let displayDraws = document.getElementById("draws");
+    displayDraws.innerText = `Draws: ${numDraws}`;
+    document.body.prependChild(displayDraws);
   } else {
     currentPlayer = nextPlayer; // swap players
   }
@@ -59,33 +59,24 @@ function checkDraw() {
 
 function checkWinner(playerSelections) {
   // Check if player has all values of each combination
-  for (
-    let winningComboIndex = 0;
-    winningComboIndex < winningCombinations.length;
-    winningComboIndex++
-  ) {
+  for (let winningComboIndex in winningCombinations) {
     let matches = 0;
-    for (
-      let chosenCell = 0;
-      chosenCell < winningCombinations[winningComboIndex].length;
-      chosenCell++
+    if (
+      playerSelections.includes(winningCombinations[winningComboIndex][0]) &&
+      playerSelections.includes(winningCombinations[winningComboIndex][1]) &&
+      playerSelections.includes(winningCombinations[winningComboIndex][2])
     ) {
-      if (
-        playerSelections.includes(
-          winningCombinations[winningComboIndex][chosenCell]
-        )
-      ) {
-        matches++;
-      } else {
-        break; // go to the next combination
-      }
-      if (matches == 3) {
-        return true;
-      }
-      // if we made it through each combo without returning true,
-      // then there were no matches and player did not win
-      return false;
+      matches = 3;
+    } /*else {
+      break; */ // go to the next combination
+    if (matches == 3) {
+      return true;
     }
+    // if we made it through each combo without returning true,
+    // then there were no matches and player did not win
+
+    // return false;
+    //}
   }
 }
 
