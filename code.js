@@ -2,6 +2,9 @@ let currentPlayer = "X";
 let nextPlayer = "O";
 let playerXSelections = [];
 let playerOSelections = [];
+let numXwins = 0;
+let numOwins = 0;
+let numDraws = 0;
 
 const winningCombinations = [
   [1, 2, 3],
@@ -28,9 +31,17 @@ const handleClick = function (event) {
   playerSelections.push(Number(cell.id));
   if (checkWinner(playerSelections)) {
     alert(`Player ` + currentPlayer + ` wins!`);
+
     resetGame();
   } else if (checkDraw()) {
     alert("Draw!");
+
+    numDraws++;
+
+    let displayDraws = document.createElement("h1");
+    displayDraws.innerText = `Draws: ${numDraws}`;
+    document.body.appendChild(displayDraws);
+
     resetGame();
   } else {
     currentPlayer = nextPlayer; // swap players
